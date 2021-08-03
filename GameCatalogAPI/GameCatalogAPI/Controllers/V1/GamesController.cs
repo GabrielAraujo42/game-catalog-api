@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using GameCatalogAPI.InputModel;
 using GameCatalogAPI.ViewModel;
 using GameCatalogAPI.Services;
+using GameCatalogAPI.Exceptions;
 
 namespace GameCatalogAPI.Controllers.V1
 {
@@ -53,7 +54,7 @@ namespace GameCatalogAPI.Controllers.V1
 
                 return Ok(game);
             }
-            catch(Exception ex)
+            catch(GameAlreadyRegisteredException ex)
             {
                 return UnprocessableEntity("Catalog already contains a game with same name and developer.");
             }
@@ -68,7 +69,7 @@ namespace GameCatalogAPI.Controllers.V1
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GameNotFoundException ex)
             {
                 return NotFound("Game not found.");
             }
@@ -83,7 +84,7 @@ namespace GameCatalogAPI.Controllers.V1
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GameNotFoundException ex)
             {
                 return NotFound("Game not found.");
             }
@@ -98,7 +99,7 @@ namespace GameCatalogAPI.Controllers.V1
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GameNotFoundException ex)
             {
                 return NotFound("Game not found.");
             }

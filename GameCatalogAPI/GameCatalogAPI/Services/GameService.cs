@@ -7,6 +7,8 @@ using GameCatalogAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using GameCatalogAPI.ViewModel;
 using GameCatalogAPI.InputModel;
+using GameCatalogAPI.Exceptions;
+using GameCatalogAPI.Entities;
 
 namespace GameCatalogAPI.Services
 {
@@ -19,34 +21,99 @@ namespace GameCatalogAPI.Services
             _gameRepository = gameRepository;
         }
 
-        public Task<ActionResult<List<GameViewModel>>> Get(int page, int amount)
+        public async Task<ActionResult<List<GameViewModel>>> Get(int page, int amount)
         {
-            throw new NotImplementedException();
+            var games = await _gameRepository.Get(page, amount);
+
+            return games.Select(game => new GameViewModel
+            {
+                Id = game.Id,
+                Name = game.Name,
+                Developer = game.Developer,
+                Price = game.Price
+            }).ToList();
         }
 
-        public Task<ActionResult<GameViewModel>> Get(Guid gameId)
+        public async Task<ActionResult<GameViewModel>> Get(Guid gameId)
         {
-            throw new NotImplementedException();
+            var game = await _gameRepository.Get(gameId);
+
+            if (game == null) return null;
+
+            return new GameViewModel
+            {
+                Id = game.Id,
+                Name = game.Name,
+                Developer = game.Developer,
+                Price = game.Price
+            };
         }
 
-        public Task<ActionResult<GameViewModel>> InsertGame(GameInputModel game)
+        public async Task<ActionResult<GameViewModel>> InsertGame(GameInputModel game)
         {
-            throw new NotImplementedException();
+            var gameEntity = await _gameRepository.Get(game.Name, game.Developer);
+
+            if (gameEntity.Count() > 0) 
+                throw new GameAlreadyRegisteredException();
+
+            var gameInsert = new Game
+            {
+                Id = Guid.NewGuid(),
+                Name = game.Name,
+                Developer = game.Developer,
+                Price = game.Price
+            };
+
+            await _gameRepository.Insert(gameInsert);
+
+            return new GameViewModel
+            {
+                Id = gameInsert.Id,
+                Name = game.Name,
+                Developer = game.Developer,
+                Price = game.Price
+            };
         }
 
-        public Task<ActionResult> UpdateGame(Guid gameId, GameInputModel game)
+        public async Task UpdateGame(Guid gameId, GameInputModel game)
         {
-            throw new NotImplementedException();
+            var gameEntity = await _gameRepository.Get(gameId);
+
+            if (gameEntity == null)
+                throw new GameNotFoundException();
+
+            gameEntity.Name = game.Name;
+            gameEntity.Developer = game.Developer;
+            gameEntity.Price = game.Price;
+
+            await _gameRepository.Update(gameEntity);
         }
 
-        public Task<ActionResult> UpdateGame(Guid gameId, double price)
+        public async Task UpdateGame(Guid gameId, double price)
         {
-            throw new NotImplementedException();
+            var gameEntity = await _gameRepository.Get(gameId);
+
+            if (gameEntity == null)
+                throw new GameNotFoundException();
+
+            gameEntity.Price = price;
+
+            await _gameRepository.Update(gameEntity);
         }
 
-        public Task<ActionResult> DeleteGame(Guid gameId)
+        public async Task DeleteGame(Guid gameId)
         {
-            throw new NotImplementedException();
+            var gameEntity = await _gameRepository.Get(gameId);
+
+            if (gameEntity == null)
+                throw new GameNotFoundException();
+
+            await _gameRepository.Delete(gameId);
+        }
+
+        public void Dispose()
+        {
+            _gameRepository?.Dispose();
         }
     }
 }
