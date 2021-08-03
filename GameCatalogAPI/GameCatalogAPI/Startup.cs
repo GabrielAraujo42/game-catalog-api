@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameCatalogAPI.Services;
+using GameCatalogAPI.Repositories;
 
 namespace GameCatalogAPI
 {
@@ -26,6 +28,8 @@ namespace GameCatalogAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGameRepository, GameRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
