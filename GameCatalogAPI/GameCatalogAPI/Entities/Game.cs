@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GameCatalogAPI.ViewModel
+namespace GameCatalogAPI.Entities
 {
-    public class GameViewModel
+    public class Game
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

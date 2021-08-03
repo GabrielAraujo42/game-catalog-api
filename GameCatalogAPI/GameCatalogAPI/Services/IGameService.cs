@@ -3,12 +3,11 @@ using GameCatalogAPI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GameCatalogAPI.Services
 {
-    public interface IGameService
+    public interface IGameService : IDisposable
     {
         Task<ActionResult<List<GameViewModel>>> Get(int page, int amount);
         Task<ActionResult<GameViewModel>> Get(Guid gameId);
