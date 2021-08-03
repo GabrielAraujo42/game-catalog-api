@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj": {}
+    "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj": {}
   },
   "projects": {
-    "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj": {
+    "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
+        "projectUniqueName": "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
         "projectName": "GameCatalogAPI",
-        "projectPath": "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
+        "projectPath": "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
         "packagesPath": "C:\\Users\\PICHAU\\.nuget\\packages\\",
-        "outputPath": "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\obj\\",
+        "outputPath": "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PICHAU\\AppData\\Roaming\\NuGet\\NuGet.Config",

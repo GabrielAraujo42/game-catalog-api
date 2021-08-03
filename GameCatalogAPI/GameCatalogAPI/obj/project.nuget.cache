@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+iKCg1RxFLJJ8yhyfoNhXxZ1yOY/aledtmBaqa9M4VqmvxK/ip2F5bopW0IeFzHvkIxWPmpVsKNo3/Dn4EijQA==",
+  "dgSpecHash": "qgk6e/DUDmknYL1T8mu1WDHcHrS+QBKGhAfhbH0qGD2adFZcn/Qlwyxpv91oDTbTx83GSlviAYgqKJl6fOYPIQ==",
   "success": true,
-  "projectFilePath": "D:\\Repository\\Z_Dotnet\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
+  "projectFilePath": "D:\\Repository\\Z_Dotnet\\game-catalog-api\\GameCatalogAPI\\GameCatalogAPI\\GameCatalogAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PICHAU\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\PICHAU\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
