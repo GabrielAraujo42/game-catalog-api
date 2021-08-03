@@ -23,6 +23,16 @@ namespace GameCatalogAPI.Controllers.V1
             _gameService = gameService;
         }
 
+        /// <summary>
+        /// Gets all games in pages
+        /// </summary>
+        /// <remarks>
+        /// Not possible to get elements in a format other than pages
+        /// </remarks>
+        /// <param name="page">Which page is being checked. Minimum: 1</param>
+        /// <param name="amount">How many elements per page. Minimum: 1 - Maximum: 50</param>
+        /// <response code="200">Returns game list</response>
+        /// <response code="204">Catalog is empty</response>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameViewModel>>> Get([FromQuery, Range(1, int.MaxValue)] int page = 1, [FromQuery, Range(1, 50)] int amount = 5)
         {
@@ -34,6 +44,12 @@ namespace GameCatalogAPI.Controllers.V1
             return Ok(games);
         }
         
+        /// <summary>
+        /// Gets a game by Id
+        /// </summary>
+        /// <param name="gameId">Id of the searched game</param>
+        /// <response code="200">Returns searched game</response>
+        /// <response code="204">No game with given Id found</response>
         [HttpGet("{gameId:guid}")]
         public async Task<ActionResult<GameViewModel>> Get([FromRoute] Guid gameId)
         {
