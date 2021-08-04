@@ -88,6 +88,7 @@ namespace GameCatalogAPI.Controllers.V1
         /// <param name="gameInputModel">Game's updated information</param>
         /// <response code="200">Game successfully updated</response>
         /// <response code="404">Game to be updated not found</response>
+        /// <response code="422">Game already exists in catalog</response>
         [HttpPut("{gameId:guid}")]
         public async Task<ActionResult> UpdateGame([FromRoute] Guid gameId, [FromBody] GameInputModel gameInputModel)
         {
@@ -96,6 +97,10 @@ namespace GameCatalogAPI.Controllers.V1
                 await _gameService.UpdateGame(gameId, gameInputModel);
 
                 return Ok();
+            }
+            catch (GameAlreadyRegisteredException ex)
+            {
+                return UnprocessableEntity("Catalog already contains a game with same name and developer.");
             }
             catch (GameNotFoundException ex)
             {

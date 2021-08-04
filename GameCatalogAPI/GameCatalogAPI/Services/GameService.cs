@@ -76,6 +76,11 @@ namespace GameCatalogAPI.Services
 
         public async Task UpdateGame(Guid gameId, GameInputModel game)
         {
+            var gamesList = await _gameRepository.Get(game.Name, game.Developer);
+
+            if (gamesList.Count() > 0)
+                throw new GameAlreadyRegisteredException();
+
             var gameEntity = await _gameRepository.Get(gameId);
 
             if (gameEntity == null)
