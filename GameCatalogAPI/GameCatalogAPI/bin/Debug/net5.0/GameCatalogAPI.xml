@@ -40,6 +40,7 @@
             <param name="gameInputModel">Game's updated information</param>
             <response code="200">Game successfully updated</response>
             <response code="404">Game to be updated not found</response>
+            <response code="422">Game already exists in catalog</response>
         </member>
         <member name="M:GameCatalogAPI.Controllers.V1.GamesController.UpdateGame(System.Guid,System.Double)">
             <summary>

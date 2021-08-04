@@ -95,36 +95,35 @@ namespace GameCatalogAPI.Repositories
         {
             var command = $"insert into Games (Id, Name, Developer, Price) values ('{game.Id}', '{game.Name}', '{game.Developer}', '{game.Price.ToString().Replace(",",".")}')";
 
-            await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
-            sqlCommand.ExecuteNonQuery();
-            await sqlConnection.CloseAsync();
+            await ExecuteCommand(command);
         }
 
         public async Task Update(Game game)
         {
             var command = $"update Games set Name = '{game.Name}', Developer = '{game.Developer}', Price = '{game.Price.ToString().Replace(",", ".")}' where Id = '{game.Id}'";
 
-            await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
-            sqlCommand.ExecuteNonQuery();
-            await sqlConnection.CloseAsync();
+            await ExecuteCommand(command);
         }
 
         public async Task Delete(Guid id)
         {
             var command = $"delete from Games where Id = '{id}'";
 
-            await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
-            sqlCommand.ExecuteNonQuery();
-            await sqlConnection.CloseAsync();
+            await ExecuteCommand(command);
         }
 
         public void Dispose()
         {
             sqlConnection?.Close();
             sqlConnection?.Dispose();
+        }
+
+        async Task ExecuteCommand(string command)
+        {
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
         }
     }
 }
