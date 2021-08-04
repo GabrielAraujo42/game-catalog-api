@@ -60,6 +60,12 @@ namespace GameCatalogAPI.Controllers.V1
             return Ok(game);
         }
 
+        /// <summary>
+        /// Inserts a new game into the repository
+        /// </summary>
+        /// <param name="gameInputModel">Game's information to be registered (Name, Developer, Price)</param>
+        /// <response code="200">Game successfully registered</response>
+        /// <response code="422">Game already exists in catalog</response>
         [HttpPost]
         public async Task<ActionResult<GameViewModel>> InsertGame([FromBody] GameInputModel gameInputModel)
         {
@@ -75,6 +81,13 @@ namespace GameCatalogAPI.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Updates a register in the repository
+        /// </summary>
+        /// <param name="gameId">Id of the game to be updated</param>
+        /// <param name="gameInputModel">Game's updated information</param>
+        /// <response code="200">Game successfully updated</response>
+        /// <response code="404">Game to be updated not found</response>
         [HttpPut("{gameId:guid}")]
         public async Task<ActionResult> UpdateGame([FromRoute] Guid gameId, [FromBody] GameInputModel gameInputModel)
         {
@@ -90,6 +103,13 @@ namespace GameCatalogAPI.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Updates price information of a registered game
+        /// </summary>
+        /// <param name="gameId">Id of the game to be updated</param>
+        /// <param name="price">Game's updated price</param>
+        /// <response code="200">Game's price successfully updated</response>
+        /// <response code="404">Game to be updated not found</response>
         [HttpPatch("{gameId:guid}/price/{price:double}")]
         public async Task<ActionResult> UpdateGame([FromRoute] Guid gameId, [FromRoute] double price)
         {
@@ -105,6 +125,12 @@ namespace GameCatalogAPI.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Deletes a game from the repository
+        /// </summary>
+        /// <param name="gameId">Id of the game to be deleted</param>
+        /// <response code="200">Game successfully deleted</response>
+        /// <response code="404">Game to be deleted not found</response>
         [HttpDelete("{gameId:guid}")]
         public async Task<ActionResult> DeleteGame([FromRoute] Guid gameId)
         {

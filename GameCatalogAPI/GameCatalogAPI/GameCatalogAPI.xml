@@ -24,5 +24,39 @@
             <response code="200">Returns searched game</response>
             <response code="204">No game with given Id found</response>
         </member>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.InsertGame(GameCatalogAPI.InputModel.GameInputModel)">
+            <summary>
+            Inserts a new game into the repository
+            </summary>
+            <param name="gameInputModel">Game's information to be registered (Name, Developer, Price)</param>
+            <response code="200">Game successfully registered</response>
+            <response code="422">Game already exists in catalog</response>
+        </member>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.UpdateGame(System.Guid,GameCatalogAPI.InputModel.GameInputModel)">
+            <summary>
+            Updates a register in the repository
+            </summary>
+            <param name="gameId">Id of the game to be updated</param>
+            <param name="gameInputModel">Game's updated information</param>
+            <response code="200">Game successfully updated</response>
+            <response code="404">Game to be updated not found</response>
+        </member>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.UpdateGame(System.Guid,System.Double)">
+            <summary>
+            Updates price information of a registered game
+            </summary>
+            <param name="gameId">Id of the game to be updated</param>
+            <param name="price">Game's updated price</param>
+            <response code="200">Game's price successfully updated</response>
+            <response code="404">Game to be updated not found</response>
+        </member>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.DeleteGame(System.Guid)">
+            <summary>
+            Deletes a game from the repository
+            </summary>
+            <param name="gameId">Id of the game to be deleted</param>
+            <response code="200">Game successfully deleted</response>
+            <response code="404">Game to be deleted not found</response>
+        </member>
     </members>
 </doc>
