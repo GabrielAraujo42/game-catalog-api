@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameCatalogAPI</name>
+    </assembly>
+    <members>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.Get(System.Int32,System.Int32)">
+            <summary>
+            Gets all games in pages
+            </summary>
+            <remarks>
+            Not possible to get elements in a format other than pages
+            </remarks>
+            <param name="page">Which page is being checked. Minimum: 1</param>
+            <param name="amount">How many elements per page. Minimum: 1 - Maximum: 50</param>
+            <response code="200">Returns game list</response>
+            <response code="204">Catalog is empty</response>
+        </member>
+        <member name="M:GameCatalogAPI.Controllers.V1.GamesController.Get(System.Guid)">
+            <summary>
+            Gets a game by Id
+            </summary>
+            <param name="gameId">Id of the searched game</param>
+            <response code="200">Returns searched game</response>
+            <response code="204">No game with given Id found</response>
+        </member>
+    </members>
+</doc>

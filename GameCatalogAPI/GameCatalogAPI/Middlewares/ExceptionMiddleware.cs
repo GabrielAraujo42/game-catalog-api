@@ -11,6 +11,11 @@ namespace GameCatalogAPI.Middlewares
     {
         readonly RequestDelegate next;
 
+        public ExceptionMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
         public async Task InvokeAsync(HttpContext context)
         {
             try

@@ -17,39 +17,115 @@ namespace GameCatalogAPI.Repositories
             sqlConnection = new SqlConnection(configuration.GetConnectionString("Default"));
         }
 
-        public Task<List<Game>> Get(int pages, int amount)
+        public async Task<List<Game>> Get(int pages, int amount)
         {
-            throw new NotImplementedException();
+            var games = new List<Game>();
+            var command = $"select * from Games order by Id offset {((pages - 1) * amount)} rows fetch next {amount} rows only";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+
+            while (sqlDataReader.Read())
+            {
+                games.Add(new Game
+                {
+                    Id = Guid.Parse(sqlDataReader["Id"].ToString()),
+                    Name = (string)sqlDataReader["Name"],
+                    Developer = (string)sqlDataReader["Developer"],
+                    Price = (double)sqlDataReader["Price"]
+                });
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return games;
         }
 
-        public Task<Game> Get(Guid id)
+        public async Task<Game> Get(Guid id)
         {
-            throw new NotImplementedException();
+            Game game = null;
+            var command = $"select * from Games where Id = '{id}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+
+            while(sqlDataReader.Read())
+            {
+                game = new Game
+                {
+                    Id = Guid.Parse(sqlDataReader["Id"].ToString()),
+                    Name = (string)sqlDataReader["Name"],
+                    Developer = (string)sqlDataReader["Developer"],
+                    Price = (double)sqlDataReader["Price"]
+                };
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return game;
         }
 
-        public Task<List<Game>> Get(string name, string developer)
+        public async Task<List<Game>> Get(string name, string developer)
         {
-            throw new NotImplementedException();
+            var games = new List<Game>();
+            var command = $"select * from Games where Name = '{name}' and Developer = '{developer}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+
+            while (sqlDataReader.Read())
+            {
+                games.Add(new Game
+                {
+                    Id = Guid.Parse(sqlDataReader["Id"].ToString()),
+                    Name = (string)sqlDataReader["Name"],
+                    Developer = (string)sqlDataReader["Developer"],
+                    Price = (double)sqlDataReader["Price"]
+                });
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return games;
         }
 
-        public Task Insert(Game game)
+        public async Task Insert(Game game)
         {
-            throw new NotImplementedException();
+            var command = $"insert into Games (Id, Name, Developer, Price) values ('{game.Id}', '{game.Name}', '{game.Developer}', '{game.Price.ToString().Replace(",",".")}')";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
         }
 
-        public Task Update(Game game)
+        public async Task Update(Game game)
         {
-            throw new NotImplementedException();
+            var command = $"update Games set Name = '{game.Name}', Developer = '{game.Developer}', Price = '{game.Price.ToString().Replace(",", ".")}' where Id = '{game.Id}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var command = $"delete from Games where Id = '{id}'";
+
+            await sqlConnection.OpenAsync();
+            SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            await sqlConnection.CloseAsync();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            sqlConnection?.Close();
+            sqlConnection?.Dispose();
         }
     }
 }
