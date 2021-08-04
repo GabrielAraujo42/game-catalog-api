@@ -1,21 +1,15 @@
+using GameCatalogAPI.Middlewares;
+using GameCatalogAPI.Repositories;
+using GameCatalogAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GameCatalogAPI.Services;
-using GameCatalogAPI.Repositories;
-using GameCatalogAPI.Middlewares;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
 
 namespace GameCatalogAPI
 {
@@ -31,7 +25,9 @@ namespace GameCatalogAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Adding GameService for GamesController constructor
             services.AddScoped<IGameService, GameService>();
+            // Adding GameSqlServerRepository for GameService constructor
             services.AddScoped<IGameRepository, GameSqlServerRepository>();
 
             services.AddControllers();
@@ -55,6 +51,7 @@ namespace GameCatalogAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GameCatalogAPI v1"));
             }
 
+            // Middleware dealing with general exceptions
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();

@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GameCatalogAPI.Exceptions;
+using GameCatalogAPI.InputModel;
+using GameCatalogAPI.Services;
+using GameCatalogAPI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using GameCatalogAPI.InputModel;
-using GameCatalogAPI.ViewModel;
-using GameCatalogAPI.Services;
-using GameCatalogAPI.Exceptions;
 
 namespace GameCatalogAPI.Controllers.V1
 {

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using GameCatalogAPI.Entities;
+using GameCatalogAPI.Exceptions;
+using GameCatalogAPI.InputModel;
+using GameCatalogAPI.Repositories;
+using GameCatalogAPI.ViewModel;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GameCatalogAPI.Services;
-using GameCatalogAPI.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using GameCatalogAPI.ViewModel;
-using GameCatalogAPI.InputModel;
-using GameCatalogAPI.Exceptions;
-using GameCatalogAPI.Entities;
 
 namespace GameCatalogAPI.Services
 {
