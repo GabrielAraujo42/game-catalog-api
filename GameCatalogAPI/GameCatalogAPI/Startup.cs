@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameCatalogAPI.Services;
 using GameCatalogAPI.Repositories;
+using GameCatalogAPI.Middlewares;
 using System.Reflection;
 using System.IO;
 
@@ -53,6 +54,8 @@ namespace GameCatalogAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GameCatalogAPI v1"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
